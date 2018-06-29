@@ -1,0 +1,14 @@
+# Ignorando pasta bin/
+bin/
+
+# Ignorando arquivos bugados Eclipse
+
+src/aplicacao/*.class
+
+# Ignorando arquivos do Eclipse
+.classpath
+.settings/
+.project
+
+# Ignorando arquivos diversos
+POO-projeto1-alterado\ em\ 02-06.pdf
