@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.TreeMap;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -48,12 +49,12 @@ public class TelaListaGarcons extends JFrame {
 			public void actionPerformed(ActionEvent e1) {
 				try{
 					String texto;
-					ArrayList<Garcom> listaGarcons = Fachada.listarGarcons();
+					TreeMap<String, Garcom> listaGarcons = Fachada.listarGarcons();
 					texto = "Listagem de garçons: \n";
 					if (listaGarcons.isEmpty())
 						texto += "O restaurante não possui garçons cadastrados \n";
 					else 	
-						for(Garcom g: listaGarcons) 
+						for(Garcom g: listaGarcons.values()) 
 							texto +=  g + "\n"; 
 
 					txtArea.setText(texto);

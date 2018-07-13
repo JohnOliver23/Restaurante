@@ -6,6 +6,7 @@ package aplicacao;
  **********************************/
 
 import java.util.ArrayList;
+import java.util.TreeMap;
 
 import fachada.Fachada;
 import modelo.Produto;
@@ -19,11 +20,17 @@ public class TesteRapidoProjeto {
 		
 		parte1();
 		
-		parte2();
+		//parte2();
 		
-		parte3();
+		//parte3();
 		
-		parte4();
+		//parte4();
+		
+		 //parte5();
+		// parte6();
+		 //parte7();
+		 //parte8();
+		   parte9();
 		System.out.println("fim do teste");
 		
 	}
@@ -38,6 +45,8 @@ public class TesteRapidoProjeto {
 			p = Fachada.cadastrarProduto("cerveja", 6.0);
 			p = Fachada.cadastrarProduto("refrigerante", 5.0);
 			p = Fachada.cadastrarProduto("agua", 2.0);
+			p = Fachada.cadastrarProduto("peixada", 200.0);
+			p = Fachada.cadastrarProduto("lagosta", 100.0);
 			ArrayList<Produto> produtos = Fachada.listarProdutos();
 			System.out.println("produtos cadastrados:");
 			System.out.println(produtos);
@@ -50,9 +59,9 @@ public class TesteRapidoProjeto {
 			Garcom g;
 			g = Fachada.cadastrarGarcom("baixinho", 1,5);
 			g = Fachada.cadastrarGarcom("esperto", 6,10);
-			g = Fachada.cadastrarGarcom("zezinho", 10,15);
-			g = Fachada.cadastrarGarcom("zezinho", 16,20);
-			ArrayList<Garcom> garcons = Fachada.listarGarcons();
+			g = Fachada.cadastrarGarcom("zezinho", 11,15);
+			g = Fachada.cadastrarGarcom("guerreirinho", 16,20);
+			TreeMap<String, Garcom> garcons = Fachada.listarGarcons();
 			System.out.println("garcons cadastrados:");
 			System.out.println(garcons);
               
@@ -139,6 +148,83 @@ public class TesteRapidoProjeto {
 
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
+		}
+	}
+	
+	public static void parte5() {
+		try {
+			/*esse teste é pra permitir a parcela em 4 vezes e o total tem que dar 480*/
+			Fachada.criarConta(10);
+			Fachada.solicitarProduto(10, "peixada");
+			Fachada.solicitarProduto(10, "peixada");
+			Fachada.fecharConta(10);
+			Fachada.pagarConta(10, "cartao", 5, "hiper", 4);
+			System.out.println("consultando a conta da mesa 10: \n"+ Fachada.consultarConta(10));
+			//System.out.println("pagando a conta 10: \n"+ Fachada.pagarConta(10, "cartao", 5, "hiper", 4));
+
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	public static void parte6() {
+		try {
+			/*esse teste é pra permitir a parcela em 4 vezes e o total tem que dar 330*/
+			Fachada.criarConta(2);
+			Fachada.solicitarProduto(2, "lagosta");
+			Fachada.solicitarProduto(2, "peixada");
+			Fachada.fecharConta(2);
+			Fachada.pagarConta(2, "cartao", 5, "hiper", 3);
+			System.out.println("consultando a conta da mesa 10: \n"+ Fachada.consultarConta(2));
+			//System.out.println("pagando a conta 2: \n"+ Fachada.pagarConta(2, "cartao", 5, "hiper", 3));
+
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	public static void parte7() {
+		try {
+			/*esse teste é pra permitir a parcela em 2 vezes e o total tem que dar 200*/
+			Fachada.criarConta(3);
+			Fachada.solicitarProduto(3, "peixada");
+			Fachada.fecharConta(3);
+			Fachada.pagarConta(3, "cartao", 5, "hiper",2);
+			System.out.println("consultando a conta da mesa 3: \n"+ Fachada.consultarConta(3));
+			//System.out.println("pagando a conta 3: \n"+ Fachada.pagarConta(3, "cartao", 5, "hiper",2));
+			
+			
+
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	public static void parte8() {
+		try {
+			/*esse teste é pra pra dar o valor de 196*/
+			Fachada.criarConta(4);
+			Fachada.solicitarProduto(4, "peixada");
+			Fachada.fecharConta(4);
+			Fachada.pagarConta(4, "dinheiro", 2, "hiper",2);
+			System.out.println("consultando a conta da mesa 4: \n"+ Fachada.consultarConta(4));
+			//System.out.println("pagando a conta 3: \n"+ Fachada.pagarConta(3, "cartao", 5, "hiper",2));
+			
+			
+
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	public static void parte9() {
+		try {
+			/*esse teste é pra pra tirar zezinho da lista de garcoms e ao listar as mesas nao aparecer o seu nome*/
+			Fachada.excluirGarcom("zezinho");
+			System.out.println(Fachada.listarGarcons());
+			System.out.println(Fachada.listarMesas());
+			
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+			
 		}
 	}
 

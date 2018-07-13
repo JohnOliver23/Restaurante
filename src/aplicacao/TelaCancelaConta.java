@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.TreeMap;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -64,11 +65,11 @@ public class TelaCancelaConta extends JFrame {
 		contentPane.add(txtIdMesa);
 		txtIdMesa.setColumns(10);
 		
-		ArrayList<Garcom> garcoms = new ArrayList<>();
+		TreeMap<String, Garcom> garcoms = new TreeMap<>();
 		garcoms = Fachada.listarGarcons();
 		String[] array = new String[garcoms.size()];
 		int i =0;
-		for(Garcom g: garcoms) {
+		for(Garcom g: garcoms.values()) {
 		    array[i] = g.getApelido();
 		    i++;
 		}

@@ -8,15 +8,25 @@ private String dtfechamento;
 private double total;
 private Mesa mesa;
 private ArrayList<Produto> produtos = new ArrayList<>();
+private Pagamento pagamento;
 /*Constructor */
 public Conta(int numero) {
 	this.numero = numero;
 }
 
 /*/*Getters and setters */
+
 public int getNumero() {
 	return numero;
 }
+public Pagamento getPagamento() {
+	return pagamento;
+}
+
+public void setPagamento(Pagamento pagamento) {
+	this.pagamento = pagamento;
+}
+
 public void setNumero(int numero) {
 	this.numero = numero;
 }
@@ -76,6 +86,10 @@ public String toString() {
 		for(Produto p : produtos) {
 			texto+=p+" ,";
 		}
+	}
+	
+	if(pagamento != null) {
+		texto+="\n"+pagamento;
 	}
 	texto+=" ] ";
 	return texto;

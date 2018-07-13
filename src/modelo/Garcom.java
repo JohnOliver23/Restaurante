@@ -37,7 +37,7 @@ public class Garcom {
 	
 	public void remover(Mesa m) {
 		mesas.remove(m);
-		//m.setGarcom(null);//bidirecional
+		m.setGarcom(null);//bidirecional
 	}
 	
 	public ArrayList<Mesa> getMesas() {

@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.TreeMap;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -63,11 +64,11 @@ public class TelaFechaConta extends JFrame {
 		lblMesa.setBounds(69, 25, 46, 14);
 		contentPane.add(lblMesa);
 		
-		ArrayList<Garcom> garcoms = new ArrayList<>();
+		TreeMap<String, Garcom> garcoms = new TreeMap<>();
 		garcoms = Fachada.listarGarcons();
 		String[] array = new String[garcoms.size()];
 		int i =0;
-		for(Garcom g: garcoms) {
+		for(Garcom g: garcoms.values()) {
 		    array[i] = g.getApelido();
 		    i++;
 		}
@@ -102,7 +103,7 @@ public class TelaFechaConta extends JFrame {
 		contentPane.add(lblmsg);
 		
 		lblGarom = new JLabel("Gar\u00E7om: ");
-		lblGarom.setBounds(69, 53, 67, 14);
+		lblGarom.setBounds(69, 53, 46, 14);
 		contentPane.add(lblGarom);
 	}
 }

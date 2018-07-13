@@ -5,11 +5,15 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.TreeMap;
 
 import modelo.Produto;
 import modelo.Garcom;
 import modelo.Mesa;
 import modelo.Conta;
+import modelo.Pagamento;
+import modelo.PagamentoCartao;
+import modelo.PagamentoDinheiro;
 import repositorio.Restaurante;
 
 public class Fachada {
@@ -31,7 +35,7 @@ public class Fachada {
 		return aux;
 	}
 	
-	public static ArrayList<Garcom>listarGarcons(){
+	public static TreeMap<String,Garcom>listarGarcons(){
 		return restaurante.getGarcons();
 	}
 	
@@ -90,7 +94,11 @@ public class Fachada {
 			if ((mesafinal - mesainicial) !=4) {
 				throw new Exception("intervalo de mesas inválidos!");
 			}
-		    Garcom g = new Garcom(apelido);
+			Garcom g = restaurante.localizarGarcom(apelido);
+			if(g != null){
+				throw new Exception("Garcom ja cadastrado");
+			}
+		    g = new Garcom(apelido);
 		    ArrayList<Mesa> mesagarcom = new ArrayList<>();
 		    for(int i = mesainicial; i<=mesafinal; i++) {
 		    	Mesa aux = restaurante.localizarMesa(i);
@@ -206,9 +214,6 @@ public class Fachada {
 			if(mesas.isEmpty()) {
 				throw new Exception ("O Garçom não tem mesas");
 			}
-			java.util.Date data = Calendar.getInstance().getTime();
-			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-			String dataAtual = formato.format(data);
 			double gorgeta = 0;
 			     
 			    ArrayList<Conta> contas;
@@ -216,7 +221,7 @@ public class Fachada {
 			      contas = m.getContas();
 			        if(!contas.isEmpty()) {  
 			          for(Conta c: contas) {
-			    	    if(c.getDtfechamento()!= null && c.getDtfechamento().equals(dataAtual)) {
+			    	    if(c.getDtfechamento()!= null) {
 			    		   gorgeta+=c.getTotal();
 			    		   
 			    	      }
@@ -248,7 +253,50 @@ public class Fachada {
 		}
 		
 		
+		
 	}
 	
-	
+	public static Pagamento pagarConta(int idmesa, String tipo, int percentual, String cartao, int quantidade) throws Exception {
+		Conta c = restaurante.localizarUltimaContaPorMesa(idmesa);
+		if(c== null) {
+			throw new Exception("Conta não encontrada");
+		}
+		if(c.getDtfechamento() == null) {
+			throw new Exception("a conta não está fechada");
+		}
+		if(tipo.equalsIgnoreCase("dinheiro")) {
+			if(percentual <0 || percentual >5) {
+				throw new Exception("desconto não permitido");
+			}
+			PagamentoDinheiro pd = new PagamentoDinheiro(c.getTotal(), percentual);
+			pd.calcularPagamento(c.getTotal());
+			c.setPagamento(pd);
+			return pd;
+		}else if(tipo.equalsIgnoreCase("cartao")) {
+			if(quantidade <0 || quantidade >4) {
+				throw new Exception("quantidade de parcelas inválido");
+			}
+			if(c.getTotal()/quantidade <100) {
+				throw new Exception("valor da parcela não permitida");
+			}
+			PagamentoCartao pc = new PagamentoCartao(c.getTotal(), cartao, quantidade);
+			pc.calcularPagamento(c.getTotal());
+			c.setPagamento(pc);
+			return pc;
+			
+		}
+		return null;
+		
+	}
+	public static void excluirGarcom(String nome)throws Exception{
+		Garcom g = restaurante.localizarGarcom(nome);
+		if(g == null) {
+			throw new Exception("Garcom inexistente");
+		}
+		for(Mesa m : g.getMesas()) {
+			m.setGarcom(null);
+		}
+		restaurante.remover(g);
+	}
+
 }
