@@ -27,10 +27,11 @@ public class TesteRapidoProjeto {
 		//parte4();
 		
 		 //parte5();
-		// parte6();
-		 //parte7();
-		 //parte8();
-		   parte9();
+		 parte6();
+		 parte7();
+		 parte8();
+		 parte9();
+		 parte10();
 		System.out.println("fim do teste");
 		
 	}
@@ -188,7 +189,7 @@ public class TesteRapidoProjeto {
 			Fachada.criarConta(3);
 			Fachada.solicitarProduto(3, "peixada");
 			Fachada.fecharConta(3);
-			Fachada.pagarConta(3, "cartao", 5, "hiper",2);
+			Fachada.pagarConta(3, "dinheiro", 5, "hiper",2);
 			System.out.println("consultando a conta da mesa 3: \n"+ Fachada.consultarConta(3));
 			//System.out.println("pagando a conta 3: \n"+ Fachada.pagarConta(3, "cartao", 5, "hiper",2));
 			
@@ -221,6 +222,16 @@ public class TesteRapidoProjeto {
 			Fachada.excluirGarcom("zezinho");
 			System.out.println(Fachada.listarGarcons());
 			System.out.println(Fachada.listarMesas());
+			
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+			
+		}
+	}
+	
+	public static void parte10() {
+		try {
+			System.out.println(Fachada.calcularPercentualMedio("baixinho"));
 			
 		}catch(Exception e) {
 			System.out.println(e.getMessage());

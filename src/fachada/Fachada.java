@@ -298,5 +298,27 @@ public class Fachada {
 		}
 		restaurante.remover(g);
 	}
+	
+	public static double calcularPercentualMedio(String apelido) throws Exception {
+		Garcom g = restaurante.localizarGarcom(apelido);
+		if (g==null) {
+			throw new Exception("Garcom não encontrado");
+		}
+		double percentual = 0;
+		int qtdContasDinheiro =0;
+		for(Mesa m: g.getMesas()) {
+			for(Conta c: m.getContas()) {
+				String modelo = c.getPagamento().getClass().getSimpleName();
+				if(modelo.equals("PagamentoDinheiro")) {
+					PagamentoDinheiro p = (PagamentoDinheiro) c.getPagamento();
+					percentual +=p.getPercentualdesconto();
+					qtdContasDinheiro++;
+				}
+				 
+				 
+			}
+		}
+		return percentual/ qtdContasDinheiro;
+	}
 
 }

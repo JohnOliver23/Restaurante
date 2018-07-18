@@ -15,6 +15,9 @@ public class PagamentoDinheiro extends Pagamento {
 	public String toString() {
 		return  "PagamentoDinheiro"+"[percentualdesconto= " + percentualdesconto +"% "+ super.toString()+"]";
 	}
+	public int getPercentualdesconto() {
+		return percentualdesconto;
+	}
 	
 	
 }
