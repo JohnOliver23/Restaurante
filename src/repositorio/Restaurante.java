@@ -1,6 +1,7 @@
 package repositorio;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.TreeMap;
 
 import modelo.Conta;
@@ -79,9 +80,11 @@ public Conta localizarUltimaContaPorMesa(int idmesa) {
         Conta c =  aux.ultimaConta();
         if(c !=null) {
         	return c;
+        	
         }
     }
     return null;
+    
 }
 
 public Produto localizarProduto(String nome){
@@ -109,6 +112,7 @@ public ArrayList<Conta> getContas() {
 
 
 public ArrayList<Produto> getProdutos() {
+	Collections.sort(produtos);
 	return produtos;
 }
 

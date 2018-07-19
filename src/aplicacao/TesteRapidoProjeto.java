@@ -32,6 +32,7 @@ public class TesteRapidoProjeto {
 		 parte8();
 		 parte9();
 		 parte10();
+		parte11();
 		System.out.println("fim do teste");
 		
 	}
@@ -175,7 +176,7 @@ public class TesteRapidoProjeto {
 			Fachada.solicitarProduto(2, "lagosta");
 			Fachada.solicitarProduto(2, "peixada");
 			Fachada.fecharConta(2);
-			Fachada.pagarConta(2, "cartao", 5, "hiper", 3);
+			Fachada.pagarConta(2, "cartão", 5, "hiper", 3);
 			System.out.println("consultando a conta da mesa 10: \n"+ Fachada.consultarConta(2));
 			//System.out.println("pagando a conta 2: \n"+ Fachada.pagarConta(2, "cartao", 5, "hiper", 3));
 
@@ -207,8 +208,6 @@ public class TesteRapidoProjeto {
 			Fachada.fecharConta(4);
 			Fachada.pagarConta(4, "dinheiro", 2, "hiper",2);
 			System.out.println("consultando a conta da mesa 4: \n"+ Fachada.consultarConta(4));
-			//System.out.println("pagando a conta 3: \n"+ Fachada.pagarConta(3, "cartao", 5, "hiper",2));
-			
 			
 
 		}catch(Exception e) {
@@ -238,6 +237,26 @@ public class TesteRapidoProjeto {
 			
 		}
 	}
-
+	public static void parte11() {//listando
+		try {
+			System.out.println("listando os produtos em odem alfabética");
+			System.out.println(Fachada.listarProdutos());//em ordem alfabetica
+			System.out.println(Fachada.listarProdutos("ada"));//em ordem alfabetica
+			System.out.println(Fachada.listarGarcons());//em ordem alfabetica
+			System.out.println(Fachada.listarContas());
+			System.out.println(Fachada.consultarConta(2));
+			Fachada.criarConta(4);
+			Fachada.solicitarProduto(4, "peixada");
+			Fachada.fecharConta(4);
+			System.out.println("resultado gorgeta de baixinho "+Fachada.calcularGorjeta("baixinho"));//resultado = 70.0
+			System.out.println("pagando a conta da mesa 4 "+Fachada.pagarConta(4, "cartão", 6, "hyper", 2));
+			System.out.println("calculando percentua Médio de baixinho"+Fachada.calcularPercentualMedio("baixinho"));
+			
+			
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+			
+		}
+	}
 
 }

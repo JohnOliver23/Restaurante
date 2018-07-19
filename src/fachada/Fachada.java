@@ -221,7 +221,7 @@ public class Fachada {
 			      contas = m.getContas();
 			        if(!contas.isEmpty()) {  
 			          for(Conta c: contas) {
-			    	    if(c.getDtfechamento()!= null) {
+			    	    if(c.getDtfechamento()!= null && c.getPagamento()!= null) {
 			    		   gorgeta+=c.getTotal();
 			    		   
 			    	      }
@@ -257,6 +257,7 @@ public class Fachada {
 	}
 	
 	public static Pagamento pagarConta(int idmesa, String tipo, int percentual, String cartao, int quantidade) throws Exception {
+		
 		Conta c = restaurante.localizarUltimaContaPorMesa(idmesa);
 		if(c== null) {
 			throw new Exception("Conta não encontrada");
@@ -264,7 +265,10 @@ public class Fachada {
 		if(c.getDtfechamento() == null) {
 			throw new Exception("a conta não está fechada");
 		}
-		if(tipo.equalsIgnoreCase("dinheiro")) {
+		if(c.getPagamento()!= null) {
+			throw new Exception("essa conta ja foi paga !");
+		}
+		if(tipo.equalsIgnoreCase("Dinheiro")) {
 			if(percentual <0 || percentual >5) {
 				throw new Exception("desconto não permitido");
 			}
@@ -272,7 +276,7 @@ public class Fachada {
 			pd.calcularPagamento(c.getTotal());
 			c.setPagamento(pd);
 			return pd;
-		}else if(tipo.equalsIgnoreCase("cartao")) {
+		}else if(tipo.equalsIgnoreCase("cartão")) {
 			if(quantidade <0 || quantidade >4) {
 				throw new Exception("quantidade de parcelas inválido");
 			}

@@ -340,6 +340,21 @@ public class TelaPrincipal {
 			}
 		});
 		mnConta.add(itemFecharConta);
-	
+		
+		JMenuItem itemPagarConta = new JMenuItem("Pagar");
+		itemPagarConta.setForeground(Color.WHITE);
+		itemPagarConta.setBackground(Color.BLACK);
+		itemPagarConta.setContentAreaFilled(false);
+		itemPagarConta.setBorder(null);
+		itemPagarConta.setBorderPainted(false);
+		itemPagarConta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				TelaPagarConta t = new TelaPagarConta();
+				t.setVisible(true);
+			}
+		});
+		
+		mnConta.add(itemPagarConta);
+		
 	}
 }
