@@ -90,7 +90,7 @@ public class TelaPrincipal {
 					p = Fachada.cadastrarProduto("Fava", 26.00);
 					p = Fachada.cadastrarProduto("Panqueca", 8.00);
 					p = Fachada.cadastrarProduto("Suco", 3.00);
-					p = Fachada.cadastrarProduto("Água", 2.00);
+					p = Fachada.cadastrarProduto("Agua", 2.00);
 					p = Fachada.cadastrarProduto("Refrigerante", 4.0);
 					p = Fachada.cadastrarProduto("Cerveja", 8.00);
 					Garcom g;

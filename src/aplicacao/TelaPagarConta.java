@@ -41,6 +41,8 @@ public class TelaPagarConta extends JFrame {
 		lblMesage = new JLabel("Tipo: ");
 		lblMesage.setBounds(10, 14, 51, 14);
 		contentPane.add(lblMesage);
+		
+		
 		TreeMap<String, Garcom> garcoms = new TreeMap<>();
 		garcoms = Fachada.listarGarcons();
 		String[] array = new String[garcoms.size()];
@@ -49,6 +51,9 @@ public class TelaPagarConta extends JFrame {
 		    array[i] = g.getApelido();
 		    i++;
 		}
+		JComboBox combo_garcom = new JComboBox(array);
+		combo_garcom.setBounds(257, 11, 104, 20);
+		contentPane.add(combo_garcom);
 		
 		lblMsg = new JLabel("");
 		lblMsg.setBounds(10, 175, 351, 14);
@@ -61,11 +66,11 @@ public class TelaPagarConta extends JFrame {
 		JComboBox combo_tipo = new JComboBox();
 		
 		combo_tipo.setModel(new DefaultComboBoxModel(new String[] {"Dinheiro", "Cart\u00E3o"}));
-		combo_tipo.setBounds(96, 11, 82, 20);
+		combo_tipo.setBounds(83, 8, 82, 20);
 		contentPane.add(combo_tipo);
 		
 		txt_idMesa = new JTextField();
-		txt_idMesa.setBounds(94, 42, 51, 20);
+		txt_idMesa.setBounds(81, 39, 51, 20);
 		contentPane.add(txt_idMesa);
 		txt_idMesa.setColumns(10);
 		
@@ -75,7 +80,7 @@ public class TelaPagarConta extends JFrame {
 		
 		JComboBox combo_percent = new JComboBox();
 		combo_percent.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5"}));
-		combo_percent.setBounds(96, 83, 41, 20);
+		combo_percent.setBounds(83, 80, 41, 20);
 		contentPane.add(combo_percent);
 		
 		JLabel lblCard = new JLabel("Cart\u00E3o:");
@@ -85,6 +90,7 @@ public class TelaPagarConta extends JFrame {
 		JComboBox combo_card = new JComboBox();
 		combo_card.setModel(new DefaultComboBoxModel(new String[] {"Hyper Card", "Master", "Visa", "Elo"}));
 		combo_card.setBounds(257, 42, 104, 20);
+		combo_card.setEnabled(false);
 		contentPane.add(combo_card);
 		
 		JLabel lblParcelas = new JLabel("Parcelas: ");
@@ -94,6 +100,7 @@ public class TelaPagarConta extends JFrame {
 		JComboBox combo_parcela = new JComboBox();
 		combo_parcela.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4"}));
 		combo_parcela.setBounds(257, 83, 51, 20);
+		combo_parcela.setEnabled(false);
 		contentPane.add(combo_parcela);
 		
 		JButton lblConfirm = new JButton("Confirmar");
@@ -102,7 +109,11 @@ public class TelaPagarConta extends JFrame {
 				try{
 					String tipo = combo_tipo.getSelectedItem().toString();
 					
+					String apelidoGarcom = combo_garcom.getSelectedItem().toString();
+					
+					
 					int idmesa = Integer.parseInt(txt_idMesa.getText());
+					
 					
 					int percentual = Integer.parseInt(combo_percent.getSelectedItem().toString());
 					
@@ -110,9 +121,14 @@ public class TelaPagarConta extends JFrame {
 					
 					int parcela = Integer.parseInt(combo_parcela.getSelectedItem().toString());
 					
+					Fachada.verificaGarcom(apelidoGarcom, idmesa);
+					
+					
 					Pagamento p = Fachada.pagarConta(idmesa, tipo, percentual, cartao, parcela);
 					
 					lblMsg.setText("Pagamento realizado com Sucesso, valor pago = "+p.getValorpago());
+					String a = "João";
+					
 					
 				}
 				catch(Exception e2){
@@ -122,6 +138,12 @@ public class TelaPagarConta extends JFrame {
 		});
 		lblConfirm.setBounds(112, 131, 127, 23);
 		contentPane.add(lblConfirm);
+		
+		JLabel lblGarcom = new JLabel("Gar\u00E7om :");
+		lblGarcom.setBounds(193, 14, 65, 14);
+		contentPane.add(lblGarcom);
+		
+
 		
 		combo_tipo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

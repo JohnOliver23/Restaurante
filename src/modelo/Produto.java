@@ -26,7 +26,7 @@ public String toString() {
 }
 @Override
 public int compareTo(Produto outro) {
-	return this.getNome().compareTo(outro.getNome());
+	return this.getNome().compareToIgnoreCase(outro.getNome());
 }
 
 
