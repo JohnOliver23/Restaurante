@@ -27,12 +27,12 @@ public class TesteRapidoProjeto {
 		//parte4();
 		
 		 //parte5();
-		 parte6();
-		 parte7();
-		 parte8();
-		 parte9();
-		 parte10();
-		parte11();
+		 //parte6();
+		 //parte7();
+		 //parte8();
+		 //parte9();
+		 //parte10();
+		//parte11();
 		System.out.println("fim do teste");
 		
 	}

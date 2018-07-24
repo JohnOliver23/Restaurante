@@ -45,7 +45,7 @@ public class TelaGorjeta extends JFrame {
 		setTitle("Cálculo da Gorjeta do Garçom");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 311, 103);
+		setBounds(100, 100, 395, 103);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -81,7 +81,7 @@ public class TelaGorjeta extends JFrame {
 		contentPane.add(btnCalcular);
 		
 		lblMensagem = new JLabel("");
-		lblMensagem.setBounds(10, 42, 273, 21);
+		lblMensagem.setBounds(10, 42, 347, 21);
 		contentPane.add(lblMensagem);
 	}
 }

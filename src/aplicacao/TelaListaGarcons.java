@@ -55,13 +55,45 @@ public class TelaListaGarcons extends JFrame {
 		list.setBounds(10, 23, 339, 206);
 		contentPane.add(list);
 		
-		JButton btnNewButton = new JButton("Adicionar");
-		btnNewButton.setBounds(413, 34, 89, 23);
-		contentPane.add(btnNewButton);
-		
 		JLabel lblGarcons = new JLabel("Listagem de Gar\u00E7ons: ");
 		lblGarcons.setBounds(10, 0, 264, 14);
 		contentPane.add(lblGarcons);
+		
+		JButton btnNewButton = new JButton("Adicionar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try{
+					String nome = JOptionPane.showInputDialog(null,"Digite o nome do garcom" );
+					int idmesa = Integer.parseInt(JOptionPane.showInputDialog(null,"Digite o id da Mesa" ));
+					System.out.println(nome);
+					System.out.println(idmesa);
+					Garcom g = Fachada.cadastrarGarcom(nome, idmesa, idmesa+4);
+					listModel.clear();
+					list.setModel(listModel);
+					int i =0;
+					TreeMap<String, Garcom> listaGarcons = Fachada.listarGarcons();
+					if (listaGarcons.isEmpty())
+						 lblGarcons.setText("O restaurante não possui garçons cadastrados \n");
+					else 	
+						for(Garcom g1: listaGarcons.values()) {
+							listModel.add(i, g1);
+							i++;
+						}
+					
+					list.setModel(listModel);
+					
+				}
+				catch(Exception erro){
+					JOptionPane.showMessageDialog(null, erro.getMessage());
+				}
+			}
+				
+			}
+		);
+		btnNewButton.setBounds(413, 34, 89, 23);
+		contentPane.add(btnNewButton);
+		
+
 		
 		btnListar = new JButton("Listar");
 		btnListar.addActionListener(new ActionListener() {

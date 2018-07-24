@@ -12,17 +12,15 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import fachada.Fachada;
-import modelo.Garcom;
 
-public class TelaCadastrarGarcom extends JFrame {
+
+public class TelaPercentualMedio extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtApelido;
-	private JTextField txtMesa;
-	private JLabel lblNome;
-	private JLabel lblMesa;
-	private JButton btnCadastro;
-	private JLabel lblMsg;
+	private JLabel lblApelido;
+	private JButton btnCalcular;
+	private JLabel lblMensagem;
 
 	/**
 	 * Launch the application.
@@ -31,7 +29,7 @@ public class TelaCadastrarGarcom extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TelaCadastrarGarcom frame = new TelaCadastrarGarcom();
+					TelaPercentualMedio frame = new TelaPercentualMedio();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -43,57 +41,47 @@ public class TelaCadastrarGarcom extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaCadastrarGarcom() {
-		setTitle("Cadastro de Garçons");
+	public TelaPercentualMedio() {
+		setTitle("Cálculo da Gorjeta do Garçom");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 311, 147);
+		setBounds(100, 100, 376, 103);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 		txtApelido = new JTextField();
-		txtApelido.setBounds(72, 11, 86, 20);
+		txtApelido.setBounds(49, 11, 86, 20);
 		contentPane.add(txtApelido);
 		txtApelido.setColumns(10);
 
-		lblNome = new JLabel("Nome");
-		lblNome.setBounds(16, 14, 46, 14);
-		contentPane.add(lblNome);
+		lblApelido = new JLabel("Nome");
+		lblApelido.setBounds(10, 14, 46, 14);
+		contentPane.add(lblApelido);
 
-		lblMesa = new JLabel("Mesa");
-		lblMesa.setBounds(16, 52, 46, 14);
-		contentPane.add(lblMesa);
-
-		txtMesa = new JTextField();
-		txtMesa.setBounds(72, 49, 86, 20);
-		contentPane.add(txtMesa);
-		txtMesa.setColumns(10);
-
-		btnCadastro = new JButton("Cadastrar");
-		btnCadastro.addActionListener(new ActionListener() {
+		btnCalcular = new JButton("Calcular");
+		btnCalcular.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try{
 					String apelido = txtApelido.getText();
-					int id = Integer.parseInt(txtMesa.getText());
-					Garcom g = Fachada.cadastrarGarcom(apelido, id, id+4);
-					lblMsg.setText("cadastrado "+g.getApelido());
+					double gorjeta = Fachada.calcularPercentualMedio(apelido);
+
+					lblMensagem.setText(apelido+ " tem um percentual médio de R$ "+ gorjeta);
 					
 					txtApelido.setText("");
-					txtMesa.setText("");
 					txtApelido.requestFocus();
 				}
 				catch(Exception erro){
-					lblMsg.setText(erro.getMessage());
+					lblMensagem.setText(erro.getMessage());
 				}
 			}
 		});
-		btnCadastro.setBounds(168, 30, 115, 23);
-		contentPane.add(btnCadastro);
+		btnCalcular.setBounds(168, 10, 115, 23);
+		contentPane.add(btnCalcular);
 		
-		lblMsg = new JLabel("");
-		lblMsg.setBounds(10, 94, 273, 14);
-		contentPane.add(lblMsg);
+		lblMensagem = new JLabel("");
+		lblMensagem.setBounds(10, 42, 350, 21);
+		contentPane.add(lblMensagem);
 	}
 }

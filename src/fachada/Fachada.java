@@ -69,6 +69,15 @@ public class Fachada {
 			throw new Exception("a mesa está ocupada"+idmesa);
              
 		}
+		/*verifica se a ultima conta da mesa ja foi paga */
+		if(!mesaaux.getContas().isEmpty()) {
+			Conta c = restaurante.localizarUltimaContaPorMesa(mesaaux.getId());
+				if(c.getPagamento() == null) {
+					throw new Exception("a última conta da mesa não foi paga");
+				}
+		}
+			
+		
 		
 			numconta++;
 			Conta contaaux = new Conta(numconta);
@@ -297,6 +306,11 @@ public class Fachada {
 		if(g == null) {
 			throw new Exception("Garcom inexistente");
 		}
+		for(Mesa m: g.getMesas()) {
+			if(m.isOcupada() == true) {
+				throw new Exception("o garcom está atendendo, não pode ser excluido");
+			}
+		}
 		for(Mesa m : g.getMesas()) {
 			m.setGarcom(null);
 		}
@@ -310,18 +324,32 @@ public class Fachada {
 		}
 		double percentual = 0;
 		int qtdContasDinheiro =0;
+		String modelo = "";
+		ArrayList<Conta> contas = new ArrayList<>();
 		for(Mesa m: g.getMesas()) {
-			for(Conta c: m.getContas()) {
-				String modelo = c.getPagamento().getClass().getSimpleName();
-				if(modelo.equals("PagamentoDinheiro")) {
-					PagamentoDinheiro p = (PagamentoDinheiro) c.getPagamento();
-					percentual +=p.getPercentualdesconto();
-					qtdContasDinheiro++;
+		      contas = m.getContas();
+		      if(!contas.isEmpty()) { 
+			     for(Conta c: m.getContas()) {
+			    	 modelo = "";
+				    if(c.getPagamento()!= null && c.getDtfechamento()!= null) {
+				      
+				      modelo = c.getPagamento().getClass().getSimpleName();
+				    }
+				    if(modelo.equals("PagamentoDinheiro")) {
+					  PagamentoDinheiro p = (PagamentoDinheiro) c.getPagamento();
+					  percentual +=p.getPercentualdesconto();
+					  qtdContasDinheiro++;
+					  
 				}
 				 
 				 
 			}
+		  }
 		}
+		if(qtdContasDinheiro ==0) {
+			return 0.00;
+		}
+
 		return percentual/ qtdContasDinheiro;
 	}
 

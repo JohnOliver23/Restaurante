@@ -208,21 +208,9 @@ public class TelaPrincipal {
 		mnGarcom.setBorderPainted(false);
 		menuBar.add(mnGarcom);	
 
-		itemCadastrarGarcom = new JMenuItem("Cadastrar");
-		itemCadastrarGarcom.setBackground(Color.BLACK);
-		itemCadastrarGarcom.setForeground(Color.WHITE);
-		itemCadastrarGarcom.setContentAreaFilled(false);
-		itemCadastrarGarcom.setBorder(null);
-		itemCadastrarGarcom.setBorderPainted(false);
-		itemCadastrarGarcom.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				TelaCadastrarGarcom t = new TelaCadastrarGarcom();
-				t.setVisible(true);
-			}
-		});
-		mnGarcom.add(itemCadastrarGarcom);
 
-		itemListarGarcom = new JMenuItem("Listar");
+
+		itemListarGarcom = new JMenuItem("Tela Garçon");
 		itemListarGarcom.setForeground(Color.WHITE);
 		itemListarGarcom.setBackground(Color.BLACK);
 		itemListarGarcom.setContentAreaFilled(false);
@@ -250,6 +238,20 @@ public class TelaPrincipal {
 			}
 		});
 		mnGarcom.add(itemCalcularGorjeta);
+		
+		JMenuItem itemPercentualMedio = new JMenuItem("Percentual Médio");
+		itemPercentualMedio.setForeground(Color.WHITE);
+		itemPercentualMedio.setBackground(Color.BLACK);
+		itemPercentualMedio.setContentAreaFilled(false);
+		itemPercentualMedio.setBorder(null);
+		itemPercentualMedio.setBorderPainted(false);
+		itemPercentualMedio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				TelaPercentualMedio t = new TelaPercentualMedio();
+				t.setVisible(true);
+			}
+		});
+		mnGarcom.add(itemPercentualMedio);
 		
 		
 		JMenu mnConta = new JMenu("     Conta     ");

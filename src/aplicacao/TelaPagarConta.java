@@ -20,6 +20,7 @@ import modelo.Garcom;
 import modelo.Pagamento;
 
 import javax.swing.DefaultComboBoxModel;
+import java.awt.Color;
 
 public class TelaPagarConta extends JFrame {
 
@@ -34,6 +35,7 @@ public class TelaPagarConta extends JFrame {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 377, 228);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
