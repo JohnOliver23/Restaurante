@@ -289,7 +289,7 @@ public class Fachada {
 			if(quantidade <0 || quantidade >4) {
 				throw new Exception("quantidade de parcelas inválido");
 			}
-			if(c.getTotal()/quantidade <100) {
+			if(c.getTotal()/quantidade <100 && quantidade !=1) {
 				throw new Exception("valor da parcela não permitida");
 			}
 			PagamentoCartao pc = new PagamentoCartao(c.getTotal(), cartao, quantidade);

@@ -13,7 +13,9 @@ public class PagamentoCartao extends Pagamento {
 	
 	@Override
 	public void calcularPagamento(double totalconta) {
-		 if(quantidadeparcelas ==1 || quantidadeparcelas ==2 && totalconta/quantidadeparcelas >=100) {
+		if(quantidadeparcelas ==1){
+			setValorpago(totalconta);
+		}else if(quantidadeparcelas ==2 && totalconta/quantidadeparcelas >=100) {
 			 setValorpago(totalconta);
 		 }else if(quantidadeparcelas ==3 && totalconta/quantidadeparcelas >=100) {
 			 setValorpago(totalconta+(totalconta*10)/100);
