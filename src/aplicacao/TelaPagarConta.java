@@ -81,7 +81,7 @@ public class TelaPagarConta extends JFrame {
 		contentPane.add(lblPercent);
 		
 		JComboBox combo_percent = new JComboBox();
-		combo_percent.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5"}));
+		combo_percent.setModel(new DefaultComboBoxModel(new String[] {"0", "1", "2", "3", "4", "5"}));
 		combo_percent.setBounds(83, 80, 41, 20);
 		contentPane.add(combo_percent);
 		

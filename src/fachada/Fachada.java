@@ -231,14 +231,14 @@ public class Fachada {
 			        if(!contas.isEmpty()) {  
 			          for(Conta c: contas) {
 			    	    if(c.getDtfechamento()!= null && c.getPagamento()!= null) {
-			    		   gorgeta+=c.getTotal();
+			    		   gorgeta+= c.getPagamento().calcularGorjeta();
 			    		   
 			    	      }
 			          }
 			        }
 			    }
 				
-			return (gorgeta * 10)/100;
+			return gorgeta;
 		}
 	}
 	 
